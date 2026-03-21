@@ -1,0 +1,13 @@
+{
+  "name": "clemens",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev -w @clemens/web",
+    "dev:worker": "npm run dev -w @clemens/worker",
+    "build": "npm run build -w @clemens/web && npm run build -w @clemens/worker"
+  }
+}

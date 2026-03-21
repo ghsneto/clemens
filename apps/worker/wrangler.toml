@@ -1,0 +1,17 @@
+name = "clemens-worker"
+main = "src/index.ts"
+compatibility_date = "2026-03-21"
+workers_dev = true
+
+[vars]
+CORS_ORIGIN = "*"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "clemens-db"
+database_id = "YOUR_D1_DATABASE_ID"
+
+[[r2_buckets]]
+binding = "BIBLE_LIBRARY"
+bucket_name = "clemens-library"
+preview_bucket_name = "clemens-library-preview"

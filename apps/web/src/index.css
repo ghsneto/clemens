@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #0f172a;
+  background: radial-gradient(circle at top right, #22d3ee 0%, #0ea5e9 30%, #0f766e 70%, #134e4a 100%);
+  font-family: "Nunito", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: #0f172a;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 16px 16px 96px;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.02));
+}
+
+.glass-panel {
+  @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-glass;
+}
+
+.field {
+  @apply w-full rounded-xl border border-white/20 bg-white/70 px-3 py-2 text-sm outline-none backdrop-blur-md focus:ring-2 focus:ring-brand-sky/40;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-xl bg-brand-ocean px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-700 backdrop-blur-md;
+}
