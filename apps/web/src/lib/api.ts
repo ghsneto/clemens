@@ -1,4 +1,4 @@
-import { ChaptersPoint, DashboardSummary, Member, MemberClass, SundaySummary, UserSession } from "../types";
+import { AgendaEvent, ChaptersPoint, DashboardSummary, MeetingMinute, Member, MemberClass, SundaySummary, UserSession } from "../types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8787";
 
@@ -67,4 +67,45 @@ export async function getChaptersSeries(year: number): Promise<ChaptersPoint[]> 
   }
   const data = await parse<{ points: ChaptersPoint[] }>(res);
   return data.points;
+}
+
+export async function getMeetingMinutes(): Promise<MeetingMinute[]> {
+  const res = await fetch(`${API_BASE_URL}/api/meeting-minutes`);
+  const data = await parse<{ records: MeetingMinute[] }>(res);
+  return data.records;
+}
+
+export async function createMeetingMinute(payload: {
+  meeting_date: string;
+  meeting_type: "ordinaria" | "extraordinaria";
+  title: string;
+  body: string;
+}): Promise<void> {
+  const res = await fetch(`${API_BASE_URL}/api/meeting-minutes`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  await parse<{ ok: boolean }>(res);
+}
+
+export async function getAgendaEvents(): Promise<AgendaEvent[]> {
+  const res = await fetch(`${API_BASE_URL}/api/agenda-events`);
+  const data = await parse<{ events: AgendaEvent[] }>(res);
+  return data.events;
+}
+
+export async function createAgendaEvent(payload: {
+  title: string;
+  description?: string;
+  location?: string;
+  starts_at: string;
+  recurrence_rule?: string;
+}): Promise<void> {
+  const res = await fetch(`${API_BASE_URL}/api/agenda-events`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  await parse<{ ok: boolean }>(res);
 }

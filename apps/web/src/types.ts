@@ -33,3 +33,23 @@ export interface ChaptersPoint {
   sundayDate: string;
   chapters: number;
 }
+
+export interface MeetingMinute {
+  id: number;
+  meeting_date: string;
+  meeting_type: "ordinaria" | "extraordinaria";
+  title: string;
+  body: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AgendaEvent {
+  id: number;
+  title: string;
+  description: string | null;
+  location: string | null;
+  starts_at: string;
+  recurrence_rule: string | null;
+  google_event_id: string | null;
+}
