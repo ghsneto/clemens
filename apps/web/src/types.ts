@@ -10,10 +10,10 @@ export interface Member {
   id: number;
   full_name: string;
   birth_date: string;
-  address: string;
+  address: string | null;
   phone: string;
-  joined_at: string;
-  baptized_at: string;
+  joined_at: string | null;
+  baptized_at: string | null;
   class_name: MemberClass;
 }
 
@@ -22,4 +22,14 @@ export interface DashboardSummary {
   totalAbsent: number;
   totalOfferings: number;
   totalChapters: number;
+}
+
+export interface SundaySummary extends DashboardSummary {
+  sundayDate: string;
+  className: MemberClass | null;
+}
+
+export interface ChaptersPoint {
+  sundayDate: string;
+  chapters: number;
 }

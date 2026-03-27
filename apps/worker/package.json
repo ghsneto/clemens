@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "wrangler dev",
     "build": "wrangler deploy --dry-run",
-    "db:migrate": "wrangler d1 execute clemens-db --file=./migrations/0001_init.sql"
+    "db:migrate": "wrangler d1 execute clemens-db --file=./migrations/0001_init.sql",
+    "db:migrate:members-optional": "wrangler d1 execute clemens-db --file=./migrations/0002_members_optional_fields.sql",
+    "db:migrate:fix-attendance-fk": "wrangler d1 execute clemens-db --file=./migrations/0003_fix_attendance_fk_after_members_migration.sql"
   },
   "dependencies": {
     "hono": "^4.9.5"

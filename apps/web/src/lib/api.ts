@@ -1,4 +1,4 @@
-import { DashboardSummary, Member, MemberClass, UserSession } from "../types";
+import { ChaptersPoint, DashboardSummary, Member, MemberClass, SundaySummary, UserSession } from "../types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8787";
 
@@ -53,4 +53,18 @@ export async function registerAttendance(payload: {
 export async function getAnnualSummary(year: number): Promise<DashboardSummary> {
   const res = await fetch(`${API_BASE_URL}/api/reports/annual?year=${year}`);
   return parse<DashboardSummary>(res);
+}
+
+export async function getSundaySummary(sundayDate: string): Promise<SundaySummary> {
+  const res = await fetch(`${API_BASE_URL}/api/reports/sunday?sundayDate=${encodeURIComponent(sundayDate)}`);
+  return parse<SundaySummary>(res);
+}
+
+export async function getChaptersSeries(year: number): Promise<ChaptersPoint[]> {
+  const res = await fetch(`${API_BASE_URL}/api/reports/chapters-series?year=${year}`);
+  if (res.status === 404) {
+    return [];
+  }
+  const data = await parse<{ points: ChaptersPoint[] }>(res);
+  return data.points;
 }

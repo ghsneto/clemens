@@ -264,6 +264,29 @@ app.get("/api/reports/annual", async (c) => {
   });
 });
 
+app.get("/api/reports/chapters-series", async (c) => {
+  const year = Number(c.req.query("year") || new Date().getFullYear());
+  const start = `${year}-01-01`;
+  const end = `${year}-12-31`;
+
+  const result = await c.env.DB.prepare(
+    `SELECT sunday_date AS sundayDate, COALESCE(SUM(chapters_read), 0) AS chapters
+     FROM attendance_records
+     WHERE sunday_date BETWEEN ?1 AND ?2
+     GROUP BY sunday_date
+     ORDER BY sunday_date ASC`
+  )
+    .bind(start, end)
+    .all<{ sundayDate: string; chapters: number }>();
+
+  return c.json({
+    points: (result.results ?? []).map((row) => ({
+      sundayDate: row.sundayDate,
+      chapters: Number(row.chapters)
+    }))
+  });
+});
+
 app.post("/api/meeting-minutes", async (c) => {
   const body = await c.req.json<{ meeting_date: string; meeting_type: "ordinaria" | "extraordinaria"; title: string; body: string }>();
   await c.env.DB.prepare(

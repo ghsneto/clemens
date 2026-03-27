@@ -16,10 +16,10 @@ CREATE TABLE IF NOT EXISTS members (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   full_name TEXT NOT NULL,
   birth_date TEXT NOT NULL,
-  address TEXT NOT NULL,
+  address TEXT,
   phone TEXT NOT NULL,
-  joined_at TEXT NOT NULL,
-  baptized_at TEXT NOT NULL,
+  joined_at TEXT,
+  baptized_at TEXT,
   class_name TEXT NOT NULL CHECK (class_name IN ('Primarios', 'Infantil', 'Adolescentes', 'Jovens', 'Adultos')),
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
