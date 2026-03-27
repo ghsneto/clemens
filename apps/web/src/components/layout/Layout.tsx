@@ -17,7 +17,7 @@ export function Layout({ title, activePage, onNavigate, user, onLogout, children
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900">
+    <div className="min-h-screen bg-slate-100 text-slate-900 lg:flex">
       <Sidebar
         activePage={activePage}
         onNavigate={onNavigate}
@@ -28,7 +28,7 @@ export function Layout({ title, activePage, onNavigate, user, onLogout, children
         onLogout={onLogout}
       />
 
-      <div className={`transition-all duration-300 lg:${collapsed ? "ml-24" : "ml-72"}`}>
+      <div className="min-w-0 flex-1">
         <Navbar title={title} onOpenSidebar={() => setMobileOpen(true)} userName={user.fullName} clientName={user.clientName} />
         <main className="p-4 sm:p-6 lg:p-8">{children}</main>
       </div>
